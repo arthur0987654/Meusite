@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pernambuco Relógios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      padding: 20px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .menu, .produtos, .mensagem {
+      margin-top: 20px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      max-width: 300px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      transition: background 0.3s;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #nomeUsuario {
+      margin-bottom: 20px;
+    }
+
+    footer {
+      margin-top: 50px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bem-vindo ao catálogo virtual</h1>
+  
+  <form id="nomeUsuario">
+    <label for="nome">Digite seu nome:</label><br>
+    <input type="text" id="nome" required />
+    <br>
+    <button type="submit">Entrar</button>
+  </form>
+
+  <div class="menu" id="menu" style="display:none;">
+    <p id="boasVindas"></p>
+    <p>O que desejas?</p>
+    <button onclick="mostrarRelogios()">1 - Relógios</button>
+    <button onclick="mostrarTenis()">2 - Tênis e itens</button>
+  </div>
+
+  <div class="produtos" id="produtos"></div>
+  <div class="mensagem" id="mensagem"></div>
+
+  <footer>
+    arthurredesete@gmail.com
+  </footer>
+
+  <script>
+    const urlInstagram = "https://www.instagram.com/direct/t/17846601273139737";
+
+    function iniciar() {
+      const nome = document.getElementById('nome').value;
+      if (nome.trim() !== "") {
+        document.getElementById('boasVindas').innerText = `Bem-vindo, ${nome}`;
+        document.getElementById('nomeUsuario').style.display = 'none';
+        document.getElementById('menu').style.display = 'block';
+      } else {
+        alert("Digite seu nome para continuar.");
+      }
+    }
+
+    function mostrarRelogios() {
+      const produtos = document.getElementById('produtos');
+      produtos.innerHTML = `
+        <h2>Relógios disponíveis</h2>
+        <button onclick="detalhesRelogio('GW8 ULTRA')">1 - GW8 ULTRA</button>
+        <button onclick="detalhesRelogio('W28 PRO')">2 - W28 PRO</button>
+        <button onclick="detalhesRelogio('WATCH 8 PRO')">3 - WATCH 8 PRO</button>
+        <button onclick="detalhesRelogio('GT3 MAX')">4 - GT3 MAX</button>
+        <button onclick="detalhesRelogio('ULTRA 8 MINI')">5 - ULTRA 8 MINI</button>
+        <button onclick="detalhesRelogio('WS79')">6 - WS79</button>
+        <button onclick="detalhesRelogio('W25 MINI')">7 - W25 MINI</button>
+        <button onclick="detalhesRelogio('Suporte')">8 - Suporte</button>
+      `;
+      document.getElementById('mensagem').innerHTML = '';
+    }
+
+    function detalhesRelogio(modelo) {
+      const mensagem = document.getElementById('mensagem');
+      if (modelo === 'Suporte') {
+        mensagem.innerHTML = `
+          <p>Você escolheu a plataforma de suporte.</p>
+          <p><a href="${urlInstagram}" target="_blank">Clique aqui para mais informações</a></p>
+        `;
+      } else {
+        mensagem.innerHTML = `
+          <p><strong>${modelo}</strong></p>
+          <p><a href="${urlInstagram}" target="_blank">Mais informações sobre este modelo</a></p>
+        `;
+      }
+    }
+
+    function mostrarTenis() {
+      document.getElementById('produtos').innerHTML = '';
+      document.getElementById('mensagem').innerHTML = `
+        <p>Catálogo de tênis disponível em:</p>
+        <p><a href="${urlInstagram}" target="_blank">${urlInstagram}</a></p>
+      `;
+    }
+
+    // Garante que o formulário funcione com Enter e com clique
+    document.getElementById("nomeUsuario").addEventListener("submit", function(e) {
+      e.preventDefault(); // Impede recarregamento
+      iniciar();
+    });
+  </script>
+
+</body>
+</html>
